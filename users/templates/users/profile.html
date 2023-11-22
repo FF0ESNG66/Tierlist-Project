@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+<title>{{ user.username }}'s Profile</title>
+
+{% block content %}
+    <h2>{{ user.username }}'s Profile</h2>
+    <hr>
+    <h3>Username: {{ user.username }}</h3>
+    <h3>First name: {{ user.first_name }}</h3>
+    <h3>Last name: {{ user.last_name }}</h3>
+    {% if user == current_user %}
+        <h3>Email: {{ user.email }}</h3>
+    {% endif %}
+    <h3>Last login: {{ user.last_login }}</h3>
+    <br>
+    <br>
+    <a href="{% url 'users:templates-owned' user.username %}"><h3>Number of templates created: {{ templates }}</h3></a>
+    <br>
+    <a href="{% url 'users:tierlist-owned' user.username %}"><h3>Number of tierlist created: {{ tierlists }}</h3></a>
+    <br>
+    {% if user == current_user %}
+        <a href="{% url 'users:edit_profile' user.username %}">Update Info</a>
+        <br>
+        <a href="{% url 'users:change_email_address' user.username %}">Change Email Address</a>
+    {% endif %}
+
+{% endblock content %}

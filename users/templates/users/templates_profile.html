@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>Your Templates</h1>
+    {% if templates %}
+        {% for temp in templates %}
+
+            <h2>{{ temp.template_name }}</h2>
+            <h3>{{ temp.template_category }}</h3>
+            <p>{{ temp.template_description}}</p>
+            {% if temp.username.is_authenticated and temp.username == temp.current_user %}
+                <a href="{% url 'users:edit-templates-profile' temp.username temp.id %}">Edit</a>
+                <a href="{% url 'users:delete-templates-profile' temp.username temp.id %}">Delete</a>
+            {% endif %}
+            <br>
+            <br>
+            
+            {% for image in temp.urls_images %}
+                <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
+            {% endfor %}
+        <br>
+        <br>
+        <hr>
+        <br>
+    {% endfor %}
+    {% else %}
+        <h2>No templates available.</h2>
+    {% endif %}
+{% endblock %}

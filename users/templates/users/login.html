@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load socialaccount %}
+
+{% block content %}
+<form method="POST" novalidate>
+	{% csrf_token %}
+	<h2>Login</h2>
+	{{form.as_p}}
+	<input type="submit" value="Login" />
+</form>
+<a href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
+<br>
+<p>Don't have an account?</p><span><a href="{% url 'users:register' %}">Register!</a></span>
+<a href="{% url 'users:password-reset' %}">Forgot Password</a>
+{% endblock content%}

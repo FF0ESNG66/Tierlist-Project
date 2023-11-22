@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+<title>{{ user.username }}'s Profile</title>
+
+{% block content %}
+<form method="POST" novalidate>
+	{% csrf_token %}
+    <h2>{{ user.username }}'s Profile</h2>
+    {% for field in form %}
+    <p>
+		{% if field.errors %}
+		<ul class="errorlist">
+			{% for error in field.errors %}
+			<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+	 	{{ field.label_tag }} {{ field }}
+    </p>
+    {% endfor %}
+    <br>
+    <br>
+    <input type="submit" value="Update" />
+</form>
+{% endblock content %}

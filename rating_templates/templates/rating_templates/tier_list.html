@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="fk_template_name" value="{{ template_name }}">
+    <h3>{{ template_tags }}</h3>
+    {{ form.as_p }}
+    {% for image in images %}
+        <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
+    {% endfor %}
+    <br>
+    {% if id %}
+        <input type="submit" value="Update">
+    {% else %}
+        <input type="submit" value="Create">
+    {% endif %}
+</form>
+{% endblock %}

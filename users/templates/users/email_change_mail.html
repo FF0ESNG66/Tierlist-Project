@@ -1,0 +1,7 @@
+{% autoescape off %}
+Hi {{ user }}
+
+Please click on the link below to change your email address:
+
+{{ Protocol }}://{{ domain }}{% url 'users:change_email_mail' username=username uidb64=uid token=token %}
+{% endautoescape %}
