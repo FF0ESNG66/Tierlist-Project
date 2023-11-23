@@ -7,37 +7,10 @@
     {% for tierlist in tierlists %}
         <h3>{{ tierlist.name }}</h3>
         <h4>{{ tierlist.tags }}</h4>
-        <h2>S:</h2>
-        {% for image in tierlist.S_Field %}
-        <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
-        {% endfor %}
-        <br>
-        <h2>A:</h2>
-        {% for image in tierlist.A_Field %}
-        <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
-        {% endfor %}
-        <br>
-        <h2>B:</h2>
-        {% for image in tierlist.B_Field %}
-        <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
-        {% endfor %}
-        <br>
-        {% for image in tierlist.C_Field %}
-        <h2>C:</h2><img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
-        {% endfor %}
-        <br>
-        <h2>D:</h2>
-        {% for image in tierlist.D_Field %}
-        <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
-        {% endfor %}
-        <br>
-        <h2>E:</h2>
-        {% for image in tierlist.E_Field %}
-        <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
-        {% endfor %}
+        <a href="{% url 'rates_lobby:tierlist-single' tierlist.name %}"><img src="{{ tierlist.cover_image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 150px; height: 150px;"></a>
         <br>
         <br>
-        <h5>owner: {{ tierlist.owner }}</h5>
+        <a href="{% url 'users:profile' tierlist.owner %}"><h5>owner: {{ tierlist.owner }}</h5></a>
         {% if request.user.is_authenticated and request.user == tierlist.owner %}
             <a href="{% url 'rating_templates:edit-tierlist' tierlist.id %}">Edit</a>
             <a href="{% url 'rating_templates:delete-tierlist' tierlist.id %}">Delete</a>

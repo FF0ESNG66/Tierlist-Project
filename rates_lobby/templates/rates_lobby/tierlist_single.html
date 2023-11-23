@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h2>{{ name }}</h2>
+    <h3>{{ tierlist.tags }}</h3>
+    <br>
+    <h2>S:</h2>
+    {% for image in     S_Field %}
+    <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
+    {% endfor %}
+    <br>
+    <h2>A:</h2>
+    {% for image in A_Field %}
+    <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
+    {% endfor %}
+    <br>
+    <h2>B:</h2>
+    {% for image in B_Field %}
+    <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
+    {% endfor %}
+    <br>
+    {% for image in C_Field %}
+    <h2>C:</h2><img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
+    {% endfor %}
+    <br>
+    <h2>D:</h2>
+    {% for image in D_Field %}
+    <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
+    {% endfor %}
+    <br>
+    <h2>E:</h2>
+    {% for image in E_Field %}
+    <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
+    {% endfor %}
+{% endblock %}

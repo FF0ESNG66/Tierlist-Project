@@ -8,50 +8,11 @@
         <h3>{{ tierlist.name }}</h3>
         <h4>{{ tierlist.tags }}</h4>
         <h5>{{ tierlist.description }}</h5>
+        <a href="{% url 'users:tierlist-single' tierlist.owner tierlist.name %}"><img src="{{ tierlist.cover_image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 150px; height: 150px;"></a>
+        <br>
         {% if tierlist.owner.is_authenticated and tierlist.owner == tierlist.current_user %}
             <a href="{% url 'users:edit-tierlist-profile' tierlist.owner tierlist.id %}">Edit</a>
             <a href="{% url 'users:delete-tierlist-profile' tierlist.owner tierlist.id %}">Delete</a>
-        {% endif %}
-        <h5>S:</h5>
-        {% if tierlist.S_Field %}
-            {% for image in tierlist.S_Field %}
-                <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
-            {% endfor %}
-        {% endif %}
-        <br>
-        <h5>A:</h5>
-        {% if tierlist.A_Field %}
-            {% for image in tierlist.A_Field %}
-                <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
-            {% endfor %}
-        {% endif %}
-        <br>
-        <h5>B:</h5>
-        {% if tierlist.B_Field %}
-            {% for image in tierlist.B_Field %}
-                <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
-            {% endfor %}
-        {% endif %}
-        <br>
-        <h5>C:</h5>
-        {% if tierlist.C_Field %}
-            {% for image in tierlist.C_Field %}
-                <img src="{{ image }}" alt="." class="object-cover inline-block " style="width: 100px; height: 100px;">
-            {% endfor %}
-        {% endif %}
-        <br>
-        <h5>D:</h5>
-        {% if tierlist.D_Field %}
-            {% for image in tierlist.D_Field %}
-                <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
-            {% endfor %}
-        {% endif %}
-        <br>
-        <h5>E:</h5>
-        {% if tierlist.E_Field %}
-            {% for image in tierlist.E_Field %}
-                <img src="{{ image }}" alt="." class="object-cover inline-block " style="width: 100px; height: 100px;">
-            {% endfor %}
         {% endif %}
         <br>
         <br>

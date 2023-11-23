@@ -2,6 +2,33 @@ from django.shortcuts import render
 from rating_templates.models import TemplateModel, TierListModel
 
 
+def tierlist_single_view(request, tierlist_name):
+    if request.method == 'GET':
+        tierlist = TierListModel.objects.get(tierlist_name=tierlist_name)
+        if tierlist:
+            tierlist_id = tierlist.id
+            tags = list(tierlist.fk_template_name.template_category.values_list('category_tag_name', flat=True))
+            context = {
+                'name': tierlist.tierlist_name,
+                'tags': ', '.join(tags),
+                'S_Field': tierlist.s.split(','),
+                'A_Field': tierlist.a.split(','),
+                'B_Field': tierlist.b.split(','),
+                'C_Field': tierlist.c.split(','),
+                'D_Field': tierlist.d.split(','),
+                'E_Field': tierlist.e.split(','),
+                'owner': tierlist.fk_user,
+                'id': tierlist_id,
+            }
+            return render(request, 'rates_lobby/tierlist_single.html', context=context)
+        else:
+            context = {
+                'tierlists': 'No tierlists to show'
+            }
+            return render(request, 'rates_lobby/tierlist_single.html', context=context)
+
+
+
 def tierlist_list_view(request):
     if request.method == 'GET':
         tierlists = TierListModel.objects.all()
@@ -9,16 +36,14 @@ def tierlist_list_view(request):
         if tierlists:
             for tierlist in tierlists:
                 tierlist_id = tierlist.id
+                image_pool = tierlist.s.split(',')
+                cover_image = image_pool[0]
+                print(cover_image)
                 tags = list(tierlist.fk_template_name.template_category.values_list('category_tag_name', flat=True))
                 data = {
                     'name': tierlist.tierlist_name,
                     'tags': ', '.join(tags),
-                    'S_Field': tierlist.s.split(','),
-                    'A_Field': tierlist.a.split(','),
-                    'B_Field': tierlist.b.split(','),
-                    'C_Field': tierlist.c.split(','),
-                    'D_Field': tierlist.d.split(','),
-                    'E_Field': tierlist.e.split(','),
+                    'cover_image': cover_image,
                     'owner': tierlist.fk_user,
                     'id': tierlist_id,
                 }

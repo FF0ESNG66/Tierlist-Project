@@ -38,4 +38,5 @@ urlpatterns = [
     path('profile/<str:username>/templates', TemplatesOwned.as_view(), name='templates-owned'),
     path('profile/<str:username>/templates/edit/<int:id>', views.EditTemplates_Profile, name='edit-templates-profile'),
     path('profile/<str:username>/templates/delete/<int:id>', views.DeleteTemplates_Profile, name='delete-templates-profile'),
+    path('profile/<str:username>/tierlist/view/<str:tierlist_name>', views.Tierlist_View_Single, name='tierlist-single')
 ]

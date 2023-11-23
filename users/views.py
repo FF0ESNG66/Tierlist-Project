@@ -235,18 +235,15 @@ class TierlistOwned(DetailView):
         user = User.objects.get(username=username)
         user_tierlist = TierListModel.objects.filter(fk_user=user.username)
         for tierlist in user_tierlist:
+            image_pool = tierlist.s.split(',')
+            cover_image = image_pool[0]
             tags = list(tierlist.fk_template_name.template_category.values_list('category_tag_name', flat=True))
             data = {
-                'name': tierlist.fk_template_name,
+                'name': tierlist.tierlist_name,
                 'tags': ', '.join(tags),
                 'description': tierlist.fk_template_name.template_description,
                 'current_user': request.user,
-                'S_Field': tierlist.s.split(','),
-                'A_Field': tierlist.a.split(','),
-                'B_Field': tierlist.b.split(','),
-                'C_Field': tierlist.c.split(','),
-                'D_Field': tierlist.d.split(','),
-                'E_Field': tierlist.e.split(','),
+                'cover_image': cover_image,
                 'owner': user,
                 'id': tierlist.id,
             }
@@ -257,6 +254,34 @@ class TierlistOwned(DetailView):
         print(f'Current user: {request.user}')
         print(f'owner: {user.username}')
         return render(request, 'users/tierlist_profile.html', context=context)
+
+
+
+@login_required
+def Tierlist_View_Single(request, username, tierlist_name):
+    if request.method == 'GET':
+        tierlist = TierListModel.objects.get(tierlist_name=tierlist_name)
+        if tierlist:
+            tierlist_id = tierlist.id
+            tags = list(tierlist.fk_template_name.template_category.values_list('category_tag_name', flat=True))
+            context = {
+                'name': tierlist.tierlist_name,
+                'tags': ', '.join(tags),
+                'S_Field': tierlist.s.split(','),
+                'A_Field': tierlist.a.split(','),
+                'B_Field': tierlist.b.split(','),
+                'C_Field': tierlist.c.split(','),
+                'D_Field': tierlist.d.split(','),
+                'E_Field': tierlist.e.split(','),
+                'owner': username,
+                'id': tierlist_id,
+            }
+            return render(request, 'users/tierlist_single.html', context=context)
+        else:
+            context = {
+                'tierlists': 'No tierlists to show'
+            }
+            return render(request, 'users/tierlist_single.html', context=context)
 
 
 

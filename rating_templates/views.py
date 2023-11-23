@@ -38,7 +38,6 @@ class TemplateView(CreateView):
         
 
 class TierListView(CreateView):
-
     def get(self, request, template_name, *args, **kwargs):
         form = TierListForm
         template_instance = get_object_or_404(TemplateModel.objects.filter(template_name=template_name))
@@ -92,6 +91,7 @@ class TierListView(CreateView):
 @login_required
 def EditTierlist(request, id):
     query = TierListModel.objects.filter(fk_user=request.user)
+    tiers = ['s', 'a', 'b', 'c', 'd', 'e']
     tierlist = get_object_or_404(query, id=id)
     template_name = tierlist.fk_template_name
     template_instance = TemplateModel.objects.get(template_name=template_name)
@@ -112,6 +112,8 @@ def EditTierlist(request, id):
             tierlist_instance = edited_tierlist.save(commit=False)
             edited_data = edited_tierlist.cleaned_data
             for field_name, field_value in edited_data.items():
+                if field_name not in tiers:
+                        continue
                 if isinstance(field_value, str):
                     urls = re.findall(r'https?://\S+?\.(?:png|jpg|jpeg|gif|bmp)', field_value)
                     # r'https?://\S+?\.(?:png|jpg|jpeg|gif|bmp)'   This was the pre vious regular expression I was using
