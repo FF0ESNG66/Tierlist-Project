@@ -5,14 +5,14 @@
     <h1>Templates Created</h1>
     {% if templates %}
         {% for temp in templates %}
-            <h2>{{ temp.template_name }}</h2>
+            <a href="{% url 'rating_templates:tierlist-creation' temp.template_name %}"><h2>{{ temp.template_name }}</h2></a>
             <h3>{{ temp.template_category }}</h3>
             <p>{{ temp.template_description}}</p>
             {% for image in temp.urls_images %}
                 <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
             {% endfor %}
             <br>
-            {% if request.user.is_authenticated and request.user == tierlist.owner %}
+            {% if request.user.is_authenticated and tirelist.current_user == tierlist.owner %}
                 <a href="{% url 'rating_templates:edit-templates' temp.id %}">Edit</a>
                 <a href="{% url 'rating_templates:delete-templates' temp.id %}">Delete</a>
             {% endif %}

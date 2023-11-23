@@ -11,7 +11,7 @@ def tierlist_list_view(request):
                 tierlist_id = tierlist.id
                 tags = list(tierlist.fk_template_name.template_category.values_list('category_tag_name', flat=True))
                 data = {
-                    'name': tierlist.fk_template_name,
+                    'name': tierlist.tierlist_name,
                     'tags': ', '.join(tags),
                     'S_Field': tierlist.s.split(','),
                     'A_Field': tierlist.a.split(','),
@@ -50,6 +50,7 @@ def templates_list_view(request):
                    'urls_images': images_urls,
                    'id': template.id,
                    'owner':template.user,
+                   'current_user': request.user.username,
                 }
                 content.append(data)
             context = {

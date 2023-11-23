@@ -44,7 +44,7 @@ class TierListModel(models.Model):
     fk_template_name = models.ForeignKey(TemplateModel, to_field='template_name', on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"{self.fk_template_name} Tierlist"
+        return self.tierlist_name # Remember to do this migration
 
     class Meta:
         verbose_name = 'TierlistModel'

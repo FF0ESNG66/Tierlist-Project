@@ -12,6 +12,8 @@
   {% else %}
     <a href="{% url 'users:login' %}"><h3>Login</h3></a>
   {% endif %}
+  <a href="{% url 'rating_templates:template-creation' %}"><h3>Create Template</h3></a>
+  <a href="{% url 'rates_lobby:templates-list-view' %}"><h3>Create Tierlist</h3></a>
   <br>
   <a href="{% url 'rates_lobby:templates-list-view' %}"><h2>Total number of templates created: {{ total_templates }}</h2></a>
   <a href="{% url 'rates_lobby:tierlist-list-view' %}"><h2>Total number of tierlists created: {{ total_tierlists }}</h2></a>
