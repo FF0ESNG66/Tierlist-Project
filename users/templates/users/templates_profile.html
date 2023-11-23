@@ -5,7 +5,6 @@
     <h1>Your Templates</h1>
     {% if templates %}
         {% for temp in templates %}
-
             <a href="{% url 'rating_templates:tierlist-creation' temp.template_name %}"><h2>{{ temp.template_name }}</h2></a>
             <h3>{{ temp.template_category }}</h3>
             <p>{{ temp.template_description}}</p>
