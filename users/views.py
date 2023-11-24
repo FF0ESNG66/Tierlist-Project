@@ -118,7 +118,7 @@ def edit_profile_view(request, username):
         if form.is_valid():
             form.save()
             messages.success(request, f'Data updated successfully')
-            return redirect(reverse('rates_lobby:home'))
+            return redirect(reverse('users:profile', args=[username]))
         else:
             messages.error(request, f"Something's wrong in the data provided")
             return redirect(reverse('users:edit_profile'))
