@@ -1,0 +1,8 @@
+{% for key,value in list.items %}
+    <br>
+    <img src="{{ key }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 200px; height: 200px;">
+    {% for key, value in value.items %}
+        <h3>{{ key }}:{{ value }}</h3>
+    {% endfor %}
+    <hr>
+{% endfor %}

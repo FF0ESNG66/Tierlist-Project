@@ -5,8 +5,10 @@
     <h2>{{ name }}</h2>
     <h3>{{ tierlist.tags }}</h3>
     <br>
+    <a href="{% url 'rates_lobby:statistics' name  %}">Statistics</a>
+    <br>
     <h2>S:</h2>
-    {% for image in     S_Field %}
+    {% for image in S_Field %}
     <img src="{{ image }}" alt="Tierlist Image" class="object-cover inline-block " style="width: 100px; height: 100px;">
     {% endfor %}
     <br>

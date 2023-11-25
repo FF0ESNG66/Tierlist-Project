@@ -263,19 +263,32 @@ def Tierlist_View_Single(request, username, tierlist_name):
         tierlist = TierListModel.objects.get(tierlist_name=tierlist_name)
         if tierlist:
             tierlist_id = tierlist.id
-            tags = list(tierlist.fk_template_name.template_category.values_list('category_tag_name', flat=True))
-            context = {
-                'name': tierlist.tierlist_name,
-                'tags': ', '.join(tags),
-                'S_Field': tierlist.s.split(','),
-                'A_Field': tierlist.a.split(','),
-                'B_Field': tierlist.b.split(','),
-                'C_Field': tierlist.c.split(','),
-                'D_Field': tierlist.d.split(','),
-                'E_Field': tierlist.e.split(','),
-                'owner': username,
-                'id': tierlist_id,
-            }
+            if tierlist.fk_template_name is not None:
+                tags = list(tierlist.fk_template_name.template_category.values_list('category_tag_name', flat=True))
+                context = {
+                    'name': tierlist.tierlist_name,
+                    'tags': ', '.join(tags),
+                    'S_Field': tierlist.s.split(','),
+                    'A_Field': tierlist.a.split(','),
+                    'B_Field': tierlist.b.split(','),
+                    'C_Field': tierlist.c.split(','),
+                    'D_Field': tierlist.d.split(','),
+                    'E_Field': tierlist.e.split(','),
+                    'owner': username,
+                    'id': tierlist_id,
+                }
+            else:
+                context = {
+                    'name': tierlist.tierlist_name,
+                    'S_Field': tierlist.s.split(','),
+                    'A_Field': tierlist.a.split(','),
+                    'B_Field': tierlist.b.split(','),
+                    'C_Field': tierlist.c.split(','),
+                    'D_Field': tierlist.d.split(','),
+                    'E_Field': tierlist.e.split(','),
+                    'owner': username,
+                    'id': tierlist_id,
+                }
             return render(request, 'users/tierlist_single.html', context=context)
         else:
             context = {

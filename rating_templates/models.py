@@ -1,5 +1,6 @@
 from django.db import models    
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 
 class CategoryModel(models.Model):
@@ -24,7 +25,7 @@ class TemplateModel(models.Model):
 
     def __str__(self):
         return self.template_name
-    
+
     class Meta:
         verbose_name = 'templateModel'
         verbose_name_plural = 'templatesModel'
@@ -41,10 +42,10 @@ class TierListModel(models.Model):
     d = models.TextField(null=True, blank=True)
     e = models.TextField(null=True, blank=True)
     fk_user = models.ForeignKey(User, to_field='username',on_delete=models.CASCADE)
-    fk_template_name = models.ForeignKey(TemplateModel, to_field='template_name', on_delete=models.CASCADE)
+    fk_template_name = models.ForeignKey(TemplateModel, to_field='template_name', on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
-        return self.tierlist_name # Remember to do this migration
+        return self.tierlist_name
 
     class Meta:
         verbose_name = 'TierlistModel'
