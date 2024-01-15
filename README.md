@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to my first Django project, a dynamic tierlist webpage featuring a custom-made login system and a unique statistical analysis feature. This project showcases my dedication to learning and implementing Django's capabilities independently.
+Welcome to my first Django project, a dynamic tierlist webpage featuring a custom-made login system and a unique statistical analysis feature. This project is a dynamic tierlist webpage, is part of my showcase and study of custom-made implemantations of Django's built-in systems
 
 ## Key Features
 
