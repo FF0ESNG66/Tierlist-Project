@@ -1,13 +1,36 @@
-# This is my first project in Django.
+# Django Tierlist Webpage.
 
-It's a tlerlist webpage with a custom (made from scratch) login system and an extra feature. This feature is that you can go to the statistics of the tierlist to see how many times each character has been placed on a specific tier within the entire domain.
-On this project I haven't used the built-in login views of Django because I wanted to test and understand how it works.
-I read a lot and look for many resources to see what interested me and then add it to my project.
-Since I've been coding lot more since this project now I see a couple of thing I could've made better (specially defining a model), however, I do think is fine for a first try in Django and still works for me to improve it in a future :)
+## Overview
 
-The way this works is with the URLs of the images, when you create a template you gotta use the urls separated by a comma (",")
+Welcome to my first Django project, a dynamic tierlist webpage featuring a custom-made login system and a unique statistical analysis feature. This project showcases my dedication to learning and implementing Django's capabilities independently.
 
-example: ur,url,url    <-- (no spaces)
+## Key Features
 
-Also, once you've created the template, you create a new tierlist by selecting the template and you only drag and drop the image to the TextField
-Once created you'll see it on the main page and you can also see its statistics
+1. **Custom Login System**
+   - Developed from scratch to gain a deeper understanding of authentication, token generation and email backend in Django.
+
+2. **Tierlist Statistics**
+   - Gain insights into character popularity with a comprehensive statistical analysis.
+   - Track how many times each character has been placed on a specific tier across the entire domain.
+
+3. **User-Friendly Image Management**
+   - Create tierlists effortlessly by dragging and dropping images into the designated TextField.
+   - Simple template creation using comma-separated URLs for image references.
+
+## Project Insights (Important to read)
+
+While this project represents my initial venture into Django development, I acknowledge areas for improvement, such as:
+
+1. Refining data models:
+   - Learning that adding `unique=True` to a field creates an index under the hood was a crucial revelation, if you're not aware of this in Django you can endup in a duplicated index situation that is kind of probelmatic
+   - Do not use huge fields (such as Texfield, Blobs, JSON) if is not critically required. This type of fields are very huge and the DBMS will use more memory to manage these fields even though you're not putting to much information in it, this is because       the DBMS will think "Oh, this is a Textfield! (in this case) it could have a large amount of data so I'll use more resources to handle it. A better approach could be using a Charfield inside of an ArrayField but we're getting out of the topic with          technical things
+
+
+2. Do *NOT* pull the entire database over the wire to do some sort of calculation:
+   - If you want to do a calculation such as count the number of instances in a table, for the love of god don't pull the entire database over the wire. This approach is very inefficient for many reasons, instead something that you can do is leave this          type of calculation at the database level and retrieve the actual value that you're looking for
+
+
+3. Efficient Database Querying:
+   - Avoid pulling the entire database when you only need specific columns.
+   - Performing `MyModel.objects.all()`, extracting a single row or a few rows for targeted use and discarding the surplus data, is highly inefficient.
+   - Instead, opt for a more resource-efficient approach using the values method. For instance, you can use `MyModel.objects.values('select your columns here')` to retrieve only the necessary data, minimizing unnecessary data retrieval and optimizing            performance.
