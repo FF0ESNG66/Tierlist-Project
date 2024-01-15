@@ -17,7 +17,7 @@ Welcome to my first Django project, a dynamic tierlist webpage featuring a custo
    - Create tierlists effortlessly by dragging and dropping images into the designated TextField.
    - Simple template creation using comma-separated URLs for image references.
 
-## Project Insights (Important to read)
+## Project Insights
 
 While this project represents my initial venture into Django development, I acknowledge areas for improvement, such as:
 
