@@ -33,4 +33,4 @@ While this project represents my initial venture into Django development, I ackn
 3. Efficient Database Querying:
    - Avoid pulling the entire database when you only need specific columns.
    - Performing `MyModel.objects.all()`, extracting a single row or a few rows for targeted use and discarding the surplus data, is highly inefficient.
-   - Instead, opt for a more resource-efficient approach using the values method. For instance, you can use `MyModel.objects.values('select your columns here')` to retrieve only the necessary data, minimizing unnecessary data retrieval and optimizing            performance.
+   - Instead, opt for a more resource-efficient approach using the values method. For instance, you can use `MyModel.objects.values('select your columns here')` to retrieve only the necessary data, minimizing unnecessary data retrieval and optimizing performance.
